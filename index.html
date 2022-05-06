@@ -22,7 +22,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.emailForm').addEventListener('submit', function (event) {
-      async function loadNamesEmails() {
+      async function sendRequest() {
         const formData = 
         { name: document.getElementById('name'),
           email: document.getElementById('email')
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let data = await response.json();
         console.log(data);
       }
-      loadNamesEmails();
+      // loadNamesEmails();
       event.preventDefault();
     });
   });
