@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pat Daunais - Celebration of Life</title>
+</head>
+<body>
+    <h1>Pat Daunais - Celebration of Life</h1>
+    <form action="" method="" class="emailForm">
+        <input type="hidden" name="date" value="currentDate">
+        <label for="name" type="text">Please enter your name</label>
+        <input type="name" name="name" id="name" required>
+        <label for="email" type="text">Please enter your email</label>
+        <input type="email" name="email" id="email" required>
+        <input type="submit" value="submit">
+    </form>
+</body>
+</html>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.emailForm').addEventListener('submit', function (event) {
+      async function loadNames() {
+        const object = 
+        { name: document.getElementById('name'),
+          email: document.getElementById('email')
+        };
+        const response = await fetch('https://script.google.com/macros/s/AKfycbyFtzFPc8kH7EdPBDT1TgfsIveCEVzHj2ZFcuurp8aFVCIu8F2Jl3n5O_l86oVedBNObg/exec', {
+          method: 'POST',
+          body: JSON.stringify(object),
+          headers: {
+            'Content-Type': 'text/plain'
+          }
+        });
+        const responseText = await response.text();
+        console.log(responseText);
+      }
+      loadNames();
+      event.preventDefault();
+    });
+  });
+</script>
+
+<!--
+  Deployment ID: AKfycbyFtzFPc8kH7EdPBDT1TgfsIveCEVzHj2ZFcuurp8aFVCIu8F2Jl3n5O_l86oVedBNObg
+
+  URL: https://script.google.com/macros/s/AKfycbyFtzFPc8kH7EdPBDT1TgfsIveCEVzHj2ZFcuurp8aFVCIu8F2Jl3n5O_l86oVedBNObg/exec
+
+  fix inception issue
+-->
