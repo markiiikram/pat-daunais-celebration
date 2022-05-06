@@ -24,11 +24,12 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.emailForm').addEventListener('submit', function (event) {
       async function sendRequest() {
         const URL = 'https://script.google.com/macros/s/AKfycbzjy3RcVerAnllxqwCNP4yRHSeZ0aeU_F9yD5F4STTWzPQ5WzI8qFxcMGnVktuuAxC5-w/exec';
-        const formData = new FormData();
         const nameField = document.querySelector('input[type="name"]');
         const emailField = document.querySelector('input[type="email"]');
-        formData.append('name', nameField.files[0]);
-        formData.append('email', emailField.files[0]);
+        const formData = {
+          name: nameField,
+          email: emailField
+        };
         const requestOptions = {
           method : 'POST',
           mode: 'no-cors',
