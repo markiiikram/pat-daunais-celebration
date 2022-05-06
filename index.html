@@ -22,23 +22,25 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.emailForm').addEventListener('submit', function (event) {
-      async function loadNames() {
-        const object = 
+      async function loadNamesEmails() {
+        const formData = 
         { name: document.getElementById('name'),
           email: document.getElementById('email')
         };
-        var options = {
+        const requestOptions = {
+          method : 'POST',
           mode: 'no-cors',
-          'method' : 'post',
           headers: {
-            "Content-Type": "text/plain;charset=utf-8",
+            "Content-Type": "application/json",
           },
-          // Convert the JavaScript object to a JSON string.
-          'payload' : JSON.stringify(object)
+          // Convert the JavaScript formData to a JSON string.
+          'payload' : JSON.stringify(formData)
         };
-        fetch('https://script.google.com/macros/s/AKfycbzjy3RcVerAnllxqwCNP4yRHSeZ0aeU_F9yD5F4STTWzPQ5WzI8qFxcMGnVktuuAxC5-w/exec', options);
+        let response = await fetch('https://script.google.com/macros/s/AKfycbzjy3RcVerAnllxqwCNP4yRHSeZ0aeU_F9yD5F4STTWzPQ5WzI8qFxcMGnVktuuAxC5-w/exec', requestOptions);
+        let data = await response.json();
+        console.log(data);
       }
-      loadNames();
+      loadNamesEmails();
       event.preventDefault();
     });
   });
