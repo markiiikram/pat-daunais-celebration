@@ -23,33 +23,39 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.emailForm').addEventListener('submit', function (event) {
       async function sendRequest() {
-        const formData = 
-        { name: document.getElementById('name'),
-          email: document.getElementById('email')
-        };
+        const URL = 'https://script.google.com/macros/s/AKfycbzjy3RcVerAnllxqwCNP4yRHSeZ0aeU_F9yD5F4STTWzPQ5WzI8qFxcMGnVktuuAxC5-w/exec';
+        const formData = new FormData();
+        const nameField = document.querySelector('input[type="name"]');
+        const emailField = document.querySelector('input[type="email"]');
+        formData.append('name', nameField.files[0]);
+        formData.append('name', emailField.files[0]);
         const requestOptions = {
           method : 'POST',
           mode: 'no-cors',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
-          // Convert the JavaScript formData to a JSON string.
-          'payload' : JSON.stringify(formData)
+          body : JSON.stringify(formData)
         };
-        let response = await fetch('https://script.google.com/macros/s/AKfycbzjy3RcVerAnllxqwCNP4yRHSeZ0aeU_F9yD5F4STTWzPQ5WzI8qFxcMGnVktuuAxC5-w/exec', requestOptions);
-        let data = await response.json();
-        console.log(data);
+        fetch(URL, requestOptions)
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
       }
-      // loadNamesEmails();
+      sendRequest();
       event.preventDefault();
     });
   });
 </script>
 
-<!-- documentation used to fix CORS issue: https://developers.google.com/apps-script/reference/url-fetch/url-fetch-app -->
+<!-- 
+  documentation used to fix CORS issue: https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server/issues/154#issuecomment-879886204
+-->
 
 <!--
-  Deployment ID: AKfycbzjy3RcVerAnllxqwCNP4yRHSeZ0aeU_F9yD5F4STTWzPQ5WzI8qFxcMGnVktuuAxC5-w
-
-  URL: https://script.google.com/macros/s/AKfycbzjy3RcVerAnllxqwCNP4yRHSeZ0aeU_F9yD5F4STTWzPQ5WzI8qFxcMGnVktuuAxC5-w/exec
+  documentation for fetch
 -->
