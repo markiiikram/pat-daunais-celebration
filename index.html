@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
           'payload' : JSON.stringify(object)
         };
         fetch('https://script.google.com/macros/s/AKfycbzjy3RcVerAnllxqwCNP4yRHSeZ0aeU_F9yD5F4STTWzPQ5WzI8qFxcMGnVktuuAxC5-w/exec', options);
-        Logger.log(response.getContentText());
       }
       loadNames();
       event.preventDefault();
