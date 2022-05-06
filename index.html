@@ -28,8 +28,11 @@ document.addEventListener('DOMContentLoaded', function() {
           email: document.getElementById('email')
         };
         var options = {
+          redirect: "follow",
           'method' : 'post',
-          'contentType': 'application/json',
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8",
+          },
           // Convert the JavaScript object to a JSON string.
           'payload' : JSON.stringify(data)
         };
