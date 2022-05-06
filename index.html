@@ -33,7 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
           // Convert the JavaScript object to a JSON string.
           'payload' : JSON.stringify(data)
         };
-        UrlFetchApp.fetch('https://script.google.com/macros/s/AKfycbyFtzFPc8kH7EdPBDT1TgfsIveCEVzHj2ZFcuurp8aFVCIu8F2Jl3n5O_l86oVedBNObg/exec', options);
+        UrlFetchApp.fetch('https://script.google.com/macros/s/AKfycbzjy3RcVerAnllxqwCNP4yRHSeZ0aeU_F9yD5F4STTWzPQ5WzI8qFxcMGnVktuuAxC5-w/exec', options);
+        Logger.log(response.getContentText());
       }
       loadNames();
       event.preventDefault();
@@ -44,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- documentation used to fix CORS issue: https://developers.google.com/apps-script/reference/url-fetch/url-fetch-app -->
 
 <!--
-  Deployment ID: AKfycbyFtzFPc8kH7EdPBDT1TgfsIveCEVzHj2ZFcuurp8aFVCIu8F2Jl3n5O_l86oVedBNObg
+  Deployment ID: AKfycbzjy3RcVerAnllxqwCNP4yRHSeZ0aeU_F9yD5F4STTWzPQ5WzI8qFxcMGnVktuuAxC5-w
 
-  URL: https://script.google.com/macros/s/AKfycbyFtzFPc8kH7EdPBDT1TgfsIveCEVzHj2ZFcuurp8aFVCIu8F2Jl3n5O_l86oVedBNObg/exec
+  URL: https://script.google.com/macros/s/AKfycbzjy3RcVerAnllxqwCNP4yRHSeZ0aeU_F9yD5F4STTWzPQ5WzI8qFxcMGnVktuuAxC5-w/exec
 -->
