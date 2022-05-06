@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
             "Content-Type": "text/plain;charset=utf-8",
           },
           // Convert the JavaScript object to a JSON string.
-          'payload' : JSON.stringify(data)
+          'payload' : JSON.stringify(object)
         };
         UrlFetchApp.fetch('https://script.google.com/macros/s/AKfycbzjy3RcVerAnllxqwCNP4yRHSeZ0aeU_F9yD5F4STTWzPQ5WzI8qFxcMGnVktuuAxC5-w/exec', options);
         Logger.log(response.getContentText());
