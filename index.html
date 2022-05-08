@@ -22,31 +22,30 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.emailForm').addEventListener('submit', function (event) {
-      async function sendRequest() {
-        const URL = 'https://script.google.com/macros/s/AKfycbyL3n_JiO67mvZo77i9RRcyFdmI2GVoBqPNrDaAFdjEzJOtHWeIzDQQ_Cb_2xznxoVFNw/exec';
+      async function postData(url = '', data = {}) {
         const nameField = document.querySelector('input[type="name"]');
         const emailField = document.querySelector('input[type="email"]');
         const formData = {
           name: nameField,
           email: emailField
         };
-        const requestOptions = {
+        const response = await fetch(URL, {
           method : 'POST',
-          // mode: 'no-cors',
           headers: {
-            // 'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'text/plain',
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
           },
           body : JSON.stringify(formData)
-        };
-        fetch(URL, { answer: 'hi marki' })
-        .then(function(response) {
-        return response.text();
-        }).then(function(name){
-            document.getElementById('name').innerHTML = JSON.stringify(name);
         });
       }
-      sendRequest();
+      postData('https://script.google.com/macros/s/AKfycbyL3n_JiO67mvZo77i9RRcyFdmI2GVoBqPNrDaAFdjEzJOtHWeIzDQQ_Cb_2xznxoVFNw/exec', {})
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
       event.preventDefault();
     });
   });
