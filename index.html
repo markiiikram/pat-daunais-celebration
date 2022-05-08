@@ -23,7 +23,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.emailForm').addEventListener('submit', function (event) {
       async function sendRequest() {
-        const URL = 'https://script.google.com/macros/s/AKfycbzjy3RcVerAnllxqwCNP4yRHSeZ0aeU_F9yD5F4STTWzPQ5WzI8qFxcMGnVktuuAxC5-w/exec';
+        const URL = 'https://script.google.com/macros/s/AKfycbyL3n_JiO67mvZo77i9RRcyFdmI2GVoBqPNrDaAFdjEzJOtHWeIzDQQ_Cb_2xznxoVFNw/exec';
         const nameField = document.querySelector('input[type="name"]');
         const emailField = document.querySelector('input[type="email"]');
         const formData = {
@@ -32,19 +32,18 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         const requestOptions = {
           method : 'POST',
-          mode: 'no-cors',
+          // mode: 'no-cors',
           headers: {
-            'Content-Type': 'application/json',
+            // 'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'text/plain',
           },
           body : JSON.stringify(formData)
         };
-        fetch(URL, requestOptions)
-        .then(response => response.json())
-        .then(data => {
-          console.log('Success:', data);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
+        fetch(URL, { answer: 'hi marki' })
+        .then(function(response) {
+        return response.text();
+        }).then(function(name){
+            document.getElementById('name').innerHTML = JSON.stringify(name);
         });
       }
       sendRequest();
@@ -59,4 +58,58 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!--
   documentation for fetch
+
+  ID: AKfycbyL3n_JiO67mvZo77i9RRcyFdmI2GVoBqPNrDaAFdjEzJOtHWeIzDQQ_Cb_2xznxoVFNw
+
+  URL:
+  https://script.google.com/macros/s/AKfycbyL3n_JiO67mvZo77i9RRcyFdmI2GVoBqPNrDaAFdjEzJOtHWeIzDQQ_Cb_2xznxoVFNw/exec
+-->
+
+<!-- Script for Apps Scripts to autopopulate the Google Sheet with the form data, found at https://github.com/levinunnink/html-form-to-google-sheet
+
+// Original code from https://github.com/jamiewilson/form-to-google-sheets
+// Updated for 2021 and ES6 standards
+
+const sheetName = 'Sheet1'
+const scriptProp = PropertiesService.getScriptProperties()
+
+function initialSetup () {
+  const activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()
+  scriptProp.setProperty('key', activeSpreadsheet.getId())
+}
+
+function doPost (e) {
+  const lock = LockService.getScriptLock()
+  lock.tryLock(10000)
+
+  try {
+    const doc = SpreadsheetApp.openById(scriptProp.getProperty('key'))
+    const sheet = doc.getSheetByName(sheetName)
+
+    const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
+    const nextRow = sheet.getLastRow() + 1
+
+    const newRow = headers.map(function(header) {
+      return header === 'Date' ? new Date() : e.parameter[header]
+    })
+
+    sheet.getRange(nextRow, 1, 1, newRow.length).setValues([newRow])
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ 'result': 'success', 'row': nextRow }))
+      .setMimeType(ContentService.MimeType.TEXT)
+  }
+
+//return ContentService.createTextOutput(JSON.stringify({status: "success", "data": "my-data"})).setMimeType(ContentService.MimeType.JSON);
+
+  catch (e) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ 'result': 'error', 'error': e }))
+      .setMimeType(ContentService.MimeType.TEXT)
+  }
+
+  finally {
+    lock.releaseLock()
+  }
+}
 -->
