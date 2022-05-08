@@ -33,12 +33,12 @@ document.addEventListener('DOMContentLoaded', function() {
           method : 'POST',
           headers: {
             'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json',
+            'Content-Type': 'text/plain',
           },
-          body : JSON.stringify(formData)
+          // body : JSON.stringify(formData)
         });
       }
-      postData('https://script.google.com/macros/s/AKfycbyL3n_JiO67mvZo77i9RRcyFdmI2GVoBqPNrDaAFdjEzJOtHWeIzDQQ_Cb_2xznxoVFNw/exec', {})
+      postData('https://script.google.com/macros/library/d/1l949YnV9sS3dPa0ok055rSpPhhWXtRR9qX0yhF3rqK1LzVQrx_vKmlV1/7', {})
       .then(response => response.json())
       .then(data => {
         console.log('Success:', data);
@@ -60,8 +60,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   ID: AKfycbyL3n_JiO67mvZo77i9RRcyFdmI2GVoBqPNrDaAFdjEzJOtHWeIzDQQ_Cb_2xznxoVFNw
 
-  URL:
-  https://script.google.com/macros/s/AKfycbyL3n_JiO67mvZo77i9RRcyFdmI2GVoBqPNrDaAFdjEzJOtHWeIzDQQ_Cb_2xznxoVFNw/exec
+  URL JSON:
+  https://script.google.com/macros/s/AKfycbyFtzFPc8kH7EdPBDT1TgfsIveCEVzHj2ZFcuurp8aFVCIu8F2Jl3n5O_l86oVedBNObg/exec
+
+  URL TEXT:
+  https://script.google.com/macros/library/d/1l949YnV9sS3dPa0ok055rSpPhhWXtRR9qX0yhF3rqK1LzVQrx_vKmlV1/7
 -->
 
 <!-- Script for Apps Scripts to autopopulate the Google Sheet with the form data, found at https://github.com/levinunnink/html-form-to-google-sheet
