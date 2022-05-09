@@ -102,13 +102,13 @@ function doPost (e) {
 
     return ContentService
       .createTextOutput(JSON.stringify({ 'result': 'success', 'row': nextRow }))
-      .setMimeType(ContentService.MimeType.TEXT)
+      .setMimeType(ContentService.MimeType.JSON/TEXT)
   }
 
   catch (e) {
     return ContentService
       .createTextOutput(JSON.stringify({ 'result': 'error', 'error': e }))
-      .setMimeType(ContentService.MimeType.TEXT)
+      .setMimeType(ContentService.MimeType.JSON/TEXT)
   }
 
   finally {
