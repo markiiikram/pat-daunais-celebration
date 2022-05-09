@@ -22,23 +22,28 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.emailForm').addEventListener('submit', function (event) {
-      async function postData(url = '', data = {}) {
+      async function postData() {
         const nameField = document.querySelector('input[type="name"]');
         const emailField = document.querySelector('input[type="email"]');
         const formData = {
           name: nameField,
           email: emailField
         };
-        const response = await fetch(url, {
+        const url = 'https://script.google.com/macros/s/AKfycbzBJ9hdLETz5O4Pkeg1AJ_aOVDTnVKxddRKmdyTWZBYMyxqi9bcQSUAA3o-iQpASESoog/exec';
+        const requestOptions = {
           method : 'POST',
+          mode: 'no-cors',
           headers: {
             'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/json',
           },
           body : JSON.stringify(formData)
-        });
+        };
+        let response = await fetch(url, requestOptions);
+        let data = await response.json();
+        console.log(data);
       }
-      postData('https://script.google.com/macros/s/AKfycbzBJ9hdLETz5O4Pkeg1AJ_aOVDTnVKxddRKmdyTWZBYMyxqi9bcQSUAA3o-iQpASESoog/exec', {})
+      postData()
       .then(response => response.json())
       .then(data => {
         console.log('Success:', data);
@@ -99,8 +104,6 @@ function doPost (e) {
       .createTextOutput(JSON.stringify({ 'result': 'success', 'row': nextRow }))
       .setMimeType(ContentService.MimeType.TEXT)
   }
-
-//return ContentService.createTextOutput(JSON.stringify({status: "success", "data": "my-data"})).setMimeType(ContentService.MimeType.JSON);
 
   catch (e) {
     return ContentService
